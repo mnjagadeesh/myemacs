@@ -7,6 +7,8 @@
 '(recentf-mode t)
 '(transient-mark-mode t)
 
+
+(load-file "/home/jagadeesh/.emacs.d/emacs-for-python/epy-init.el")
 ;(set-default-font "Bitstream Vera Sans Mono-10")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;  'han '("cwTeXHeiBold" . "unicode-bmp"))
@@ -27,7 +29,7 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 
-(setq default-frame-alist '((font . "inconsolata")))
+;; (setq default-frame-alist '((font . "inconsolata")))
 
 ;; Get back font antialiasing
 (push '(font-backend xft x) default-frame-alist)
@@ -166,9 +168,9 @@ LIST defaults to all existing live buffers."
 
 ;; cedet
 ;; See cedet/common/cedet.info for configuration details.
-;; (load-file "~/.emacs.d/plugins/cedet/common/cedet.el")
+(load-file "~/.emacs.d/plugins/cedet/common/cedet.el")
 ; Enable EDE (Project Management) features
-;(global-ede-mode 1)
+(global-ede-mode 1)
 ;; * This enables the database and idle reparse engines
 ;(semantic-load-enable-minimum-features)
 ;(setq semantic-load-turn-everything-on t)
