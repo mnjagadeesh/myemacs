@@ -7,12 +7,20 @@
 '(recentf-mode t)
 '(transient-mark-mode t)
 
-
-(load-file "/home/jagadeesh/.emacs.d/emacs-for-python/epy-init.el")
+(load-file "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python/epy-init.el")
 ;(set-default-font "Bitstream Vera Sans Mono-10")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;  'han '("cwTeXHeiBold" . "unicode-bmp"))
-
+;;; ================= uptime ============================
+(setq-default 
+ mode-line-format
+ (list " " 'mode-line-modified
+       "--" 'mode-line-buffer-identification
+       "--" 'mode-line-modes
+       'mode-line-position
+       "--[uptime: " '(:eval (shell-command-to-string "uptime |awk -F' '  '{print $3 $4}'"))
+       "]-%-"))
+;;; =====================================================
 (setq make-backup-files nil)
 (setq query-replace-highlight t)
 (setq search-highlight t)
@@ -28,7 +36,7 @@
 ;; Get rid of the startup screen
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
-
+;;;;DejaVu Sans
 ;; (setq default-frame-alist '((font . "inconsolata")))
 
 ;; Get back font antialiasing
@@ -317,16 +325,16 @@ LIST defaults to all existing live buffers."
 t)
 
 ;; ruby-mode
-(add-to-list 'load-path "~/.emacs.d/plugins/ruby-mode")
-(require 'ruby-mode)
-(require 'ruby-electric)
-(add-hook 'ruby-mode-hook 'turn-on-font-lock)
-(add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+;; (add-to-list 'load-path "~/.emacs.d/plugins/ruby-mode")
+;; (require 'ruby-mode)
+;; (require 'ruby-electric)
+;; (add-hook 'ruby-mode-hook 'turn-on-font-lock)
+;; (add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
+;; (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 
 ;; ruby-block
-(add-to-list 'load-path "~/.emacs.d/plugins/ruby-block")
-(require 'ruby-block)
+;;(add-to-list 'load-path "~/.emacs.d/plugins/ruby-block")
+;;(require 'ruby-block)
 
 ;; ruby electric
 (defun try-complete-abbrev (old)
@@ -350,33 +358,33 @@ t)
 
 
 ;; ri-emacs
-(setq ri-ruby-script (expand-file-name "~/.emacs.d/plugins/ri-emacs/ri-emacs.rb"))
+;;(setq ri-ruby-script (expand-file-name "~/.emacs.d/plugins/ri-emacs/ri-emacs.rb"))
 ;(autoload 'ri (expand-file-name "~/.emacs.d/plugins/ri-emacs/ri-ruby.el") nil t)
-(load "~/.emacs.d/plugins/ri-emacs/ri-ruby.el")
+;;(load "~/.emacs.d/plugins/ri-emacs/ri-ruby.el")
 
 
 ;; ruby-mode-hook
-(add-hook 'ruby-mode-hook
-         (lambda()
-           (add-hook 'write-file-functions
-                      '(lambda()
-                         (save-excursion
-                           (untabify (point-min) (point-max))
-                           (delete-trailing-whitespace)
-                           )))
-           (set (make-local-variable 'indent-tabs-mode) 'nil)
-           (set (make-local-variable 'tab-width) 2)
-           (imenu-add-to-menubar "IMENU")
-;           (require 'ruby-electric)
-           (ruby-electric-mode t)
-;           (require 'ruby-block)
-           (ruby-block-mode t)
-;           (local-set-key 'f1 'ri)
-           (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
-;           (local-set-key 'f4 'ri-ruby-show-args)
-           (define-key ruby-mode-map "\M-\C-o" 'rct-complete-symbol)
-           (local-set-key (kbd "<return>") 'newline-and-indent)
-))
+;; (add-hook 'ruby-mode-hook
+;;          (lambda()
+;;            (add-hook 'write-file-functions
+;;                       '(lambda()
+;;                          (save-excursion
+;;                            (untabify (point-min) (point-max))
+;;                            (delete-trailing-whitespace)
+;;                            )))
+;;            (set (make-local-variable 'indent-tabs-mode) 'nil)
+;;            (set (make-local-variable 'tab-width) 2)
+;;            (imenu-add-to-menubar "IMENU")
+;; ;           (require 'ruby-electric)
+;;            (ruby-electric-mode t)
+;; ;           (require 'ruby-block)
+;;            (ruby-block-mode t)
+;; ;           (local-set-key 'f1 'ri)
+;;            (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
+;; ;           (local-set-key 'f4 'ri-ruby-show-args)
+;;            (define-key ruby-mode-map "\M-\C-o" 'rct-complete-symbol)
+;;            (local-set-key (kbd "<return>") 'newline-and-indent)
+;; ))
 
 
 ;; nxhtml
@@ -441,27 +449,27 @@ makes)."
 
 
 ;; Invoke ruby with '-c' to get syntax checking
-(defun flymake-ruby-init ()
-  (let* ((temp-file   (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-intemp))
-         (local-file  (file-relative-name
-                       temp-file
-                       (file-name-directory buffer-file-name))))
-    (list "ruby" (list "-c" local-file))))
+;; (defun flymake-ruby-init ()
+;;   (let* ((temp-file   (flymake-init-create-temp-buffer-copy
+;;                        'flymake-create-temp-intemp))
+;;          (local-file  (file-relative-name
+;;                        temp-file
+;;                        (file-name-directory buffer-file-name))))
+;;     (list "ruby" (list "-c" local-file))))
 
-(push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
-(push '(".+\\.rjs$" flymake-ruby-init) flymake-allowed-file-name-masks)
-(push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
+;; (push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
+;; (push '(".+\\.rjs$" flymake-ruby-init) flymake-allowed-file-name-masks)
+;; (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
 
-(push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3) flymake-err-line-patterns)
+;; (push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3) flymake-err-line-patterns)
 
-(add-hook 'ruby-mode-hook
-          '(lambda ()
+;; (add-hook 'ruby-mode-hook
+;;           '(lambda ()
 
-             ;; Don't want flymake mode for ruby regions in rhtml files and also on read only files
-             (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
-                 (flymake-mode))
-             ))
+;;              ;; Don't want flymake mode for ruby regions in rhtml files and also on read only files
+;;              (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
+;;                  (flymake-mode))
+;;              ))
 
 (require 'flymake-jslint)
 (add-hook 'javascript-mode-hook
@@ -583,5 +591,9 @@ makes)."
 (add-to-list 'backup-directory-alist
              (cons tramp-file-name-regexp nil))
 
+(load "~/.emacs.d/plugins/undo-tree.el")
+(require 'undo-tree)
 
-
+'(show-trailing-whitespace t)
+ '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(pyc\\|elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
+(savehist-mode 1)
