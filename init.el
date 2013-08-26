@@ -8,6 +8,15 @@
 '(transient-mark-mode t)
 
 (load-file "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python/epy-init.el")
+
+(add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python") ;; tell where to load the various files
+(require 'epy-setup)      ;; It will setup other loads, it is required!
+(require 'epy-python)     ;; If you want the python facilities [optional]
+(require 'epy-completion) ;; If you want the autocompletion settings [optional]
+(require 'epy-editing)    ;; For configurations related to editing [optional]
+(require 'epy-bindings)   ;; For my suggested keybindings [optional]
+(require 'epy-nose)       ;; For nose integration
+
 ;(set-default-font "Bitstream Vera Sans Mono-10")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;  'han '("cwTeXHeiBold" . "unicode-bmp"))
@@ -20,6 +29,10 @@
        'mode-line-position
        "--[uptime: " '(:eval (shell-command-to-string "uptime |awk -F' '  '{print $3 $4}'"))
        "]-%-"))
+(add-to-list 'load-path "~/.emacs.d/plugins/magit")
+;;;(add-to-list 'load-path "~/.emacs.d/plugins/magit/contrib")
+(require 'magit)
+
 ;;; =====================================================
 (setq make-backup-files nil)
 (setq query-replace-highlight t)
@@ -597,3 +610,16 @@ makes)."
 '(show-trailing-whitespace t)
  '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(pyc\\|elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
 (savehist-mode 1)
+;;;(load-file "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python/epy-init.el")
+
+(defun python-add-breakpoint ()
+  "Add a break point"
+  (interactive)
+  (newline-and-indent)
+  (insert "import pdb; pdb.set_trace()")
+  (highlight-lines-matching-regexp "^[ ]*import pdb; pdb.set_trace()"))
+
+(define-key python-mode-map (kbd "C-c C-b") 'python-add-breakpoint)
+
+; Set cursor color to white
+(set-cursor-color "#ffffff") 
