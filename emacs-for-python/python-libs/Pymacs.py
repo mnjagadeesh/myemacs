@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/local/PALYAM/njagadeesh/virtualenvs/py2.7/bin/python
 # -*- coding: utf-8 -*-
 # Copyright © 2001, 2002, 2003, 2012 Progiciels Bourbeau-Pinard inc.
 # François Pinard <pinard@iro.umontreal.ca>, 2001.
@@ -36,16 +36,6 @@ version = '0.25'
 
 import os
 import sys
-
-
-
-
-
-
-
-
-
-
 __metaclass__ = type
 
 

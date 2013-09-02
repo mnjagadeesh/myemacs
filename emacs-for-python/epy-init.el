@@ -8,6 +8,8 @@
   "Installation directory of emacs-for-python"
 )
 
+(autoload 'python-pep8 "python-pep8")
+(autoload 'pep8 "python-pep8")
 (add-to-list 'load-path epy-install-dir)
 (require 'epy-setup)
 (require 'epy-python)
@@ -15,6 +17,7 @@
 (require 'epy-editing)
 (require 'epy-nose)
 (require 'epy-bindings)
+;;(require 'python-pep8.el)
 
 
 

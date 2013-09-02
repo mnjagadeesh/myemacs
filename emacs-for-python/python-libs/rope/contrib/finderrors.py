@@ -1,3 +1,4 @@
+#!/home/local/PALYAM/njagadeesh/virtualenvs/py2.7/bin/python
 """Finding bad name and attribute accesses
 
 `find_errors` function can be used to find possible bad name and

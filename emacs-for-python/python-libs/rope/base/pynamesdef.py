@@ -1,3 +1,4 @@
+#!/home/local/PALYAM/njagadeesh/virtualenvs/py2.7/bin/python
 import rope.base.oi.soi
 from rope.base import pynames
 from rope.base.pynames import *

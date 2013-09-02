@@ -655,7 +655,6 @@ makes)."
                '("\\.py\\'" flymake-pyflakes-init)))
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
-(custom-set-variables
 '(py-pychecker-command "/home/local/PALYAM/njagadeesh/bin/pychecker.sh")
 '(py-pychecker-command-args (quote ("")))
-'(python-check-command "/home/local/PALYAM/njagadeesh/bin/pychecker.sh"))
+'(python-check-command "/home/local/PALYAM/njagadeesh/bin/pychecker.sh")
