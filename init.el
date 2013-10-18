@@ -1,29 +1,10 @@
-;(setq locale-coding-system 'utf-8)
-;(set-terminal-coding-system 'utf-8)
-;(set-keyboard-coding-system 'utf-8)
-;(set-selection-coding-system 'utf-8)
-;(prefer-coding-system 'utf-8)
-;'(buffer-encoding (quote utf-8))
 '(recentf-mode t)
 '(transient-mark-mode t)
 (load-file "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python/epy-init.el")
 
 (load-file "~/.emacs.d/plugins/minimap/minimap.el")
 (require 'minimap)
-;;(load-file "~/.emacs.d/plugins/undo-tree.el")
-;;(add-to-list 'load-path "~/.emacs.d/plugins/undo-tree.el")
-;;(require 'undo-tree)
-;;(global-undo-tree-mode 1)
 
-
-
-;; (add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python") ;; tell where to load the various files
-;; (require 'epy-setup)      ;; It will setup other loads, it is required!
-;; (require 'epy-python)     ;; If you want the python facilities [optional]
-;; (require 'epy-completion) ;; If you want the autocompletion settings [optional]
-;; (require 'epy-editing)    ;; For configurations related to editing [optional]
-;; (require 'epy-bindings)   ;; For my suggested keybindings [optional]
-;; (require 'epy-nose)       ;; For nose integration
 
 ;(set-default-font "Bitstream Vera Sans Mono-10")
 ;(set-fontset-font (frame-parameter nil 'font)
@@ -58,7 +39,7 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 ;;;;DejaVu Sans
-;; (setq default-frame-alist '((font . "inconsolata")))
+(setq default-frame-alist '((font . "inconsolata")))
 
 ;; Get back font antialiasing
 (push '(font-backend xft x) default-frame-alist)
@@ -66,12 +47,12 @@
 ;(global-font-lock-mode t t)
 (setq font-lock-maximum-decoration t)
 
-;(setq default-directory "~/Documentos/WyeWorks/Proys/")
 (setq default-directory "~/")
 
 ;; Get rid of toolbar, scrollbar, menubar
 (progn
-  (tool-bar-mode)
+  (linum-mode 1)  
+  (tool-bar-mode -1)
 ;  (menu-bar-mode)
   (scroll-bar-mode))
 
@@ -85,7 +66,6 @@
 (global-set-key [(control -)] 'redo)
 
 ;; show ascii table
-;; optained from http://www.chrislott.org/geek/emacs/dotemacs.html
 (defun ascii-table ()
   "Print the ascii table. Based on a defun by Alex Schroeder <asc@bsiag.com>"
   (interactive)
@@ -100,15 +80,12 @@
 
 
 ;; insert date into buffer at point
-;; optained from http://www.chrislott.org/geek/emacs/dotemacs.html
 (defun insert-date ()
   "Insert date at point."
   (interactive)
   (insert (format-time-string "%a %Y-%m-%d - %l:%M %p")))
 
 
-;; Centering code stolen from somewhere and restolen from
-;; http://www.chrislott.org/geek/emacs/dotemacs.html
 ;; centers the screen around a line...
 (global-set-key [(control l)]  'centerer)
 (defun centerer ()
@@ -125,7 +102,6 @@
 
 
 ;; Kills live buffers, leaves some emacs work buffers
-;; optained from http://www.chrislott.org/geek/emacs/dotemacs.html
 (defun nuke-some-buffers (&optional list)
   "For each buffer in LIST, kill it silently if unmodified. Otherwise ask.
 LIST defaults to all existing live buffers."
@@ -148,18 +124,6 @@ LIST defaults to all existing live buffers."
                    (kill-buffer buffer))
              (kill-buffer buffer))))
     (setq list (cdr list))))
-
-
-;; fullscreen
-;(defun toggle-fullscreen ()
-;(interactive)
-;(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-;'(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-;(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-;'(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-;)
-;(toggle-fullscreen)
-
 
 ;; maxframe
 (add-to-list  'load-path "~/.emacs.d/plugins/maxframe")
@@ -216,7 +180,11 @@ LIST defaults to all existing live buffers."
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(ecb-layout-window-sizes (quote (("left8" (ecb-directories-buffer-name 0.23671497584541062 . 0.29310344827586204) (ecb-sources-buffer-name 0.23671497584541062 . 0.22413793103448276) (ecb-methods-buffer-name 0.23671497584541062 . 0.25862068965517243) (ecb-history-buffer-name 0.23671497584541062 . 0.20689655172413793)))))
- '(ecb-options-version "2.40"))
+ '(ecb-options-version "2.40")
+ '(org-agenda-files (quote ("~/Documents/logging-exim/todo.org")))
+ '(py-pychecker-command "/home/local/PALYAM/njagadeesh/bin/pychecker.sh")
+ '(py-pychecker-command-args (quote ("")))
+ '(python-check-command "/home/local/PALYAM/njagadeesh/bin/pychecker.sh"))
 ;; resize the windows on emacs and run ecb-store-window-sizes
 ; '(show-paren-mode t))
 
@@ -344,18 +312,6 @@ LIST defaults to all existing live buffers."
   )
 t)
 
-;; ruby-mode
-;; (add-to-list 'load-path "~/.emacs.d/plugins/ruby-mode")
-;; (require 'ruby-mode)
-;; (require 'ruby-electric)
-;; (add-hook 'ruby-mode-hook 'turn-on-font-lock)
-;; (add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
-;; (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-
-;; ruby-block
-;;(add-to-list 'load-path "~/.emacs.d/plugins/ruby-block")
-;;(require 'ruby-block)
-
 ;; ruby electric
 (defun try-complete-abbrev (old)
   (if (expand-abbrev) t nil))
@@ -375,54 +331,6 @@ t)
 (add-to-list 'load-path "~/.emacs.d/plugins/rdebug")
 (require 'rdebug)
 (setq rdebug-short-key-mode t)
-
-
-;; ri-emacs
-;;(setq ri-ruby-script (expand-file-name "~/.emacs.d/plugins/ri-emacs/ri-emacs.rb"))
-;(autoload 'ri (expand-file-name "~/.emacs.d/plugins/ri-emacs/ri-ruby.el") nil t)
-;;(load "~/.emacs.d/plugins/ri-emacs/ri-ruby.el")
-
-
-;; ruby-mode-hook
-;; (add-hook 'ruby-mode-hook
-;;          (lambda()
-;;            (add-hook 'write-file-functions
-;;                       '(lambda()
-;;                          (save-excursion
-;;                            (untabify (point-min) (point-max))
-;;                            (delete-trailing-whitespace)
-;;                            )))
-;;            (set (make-local-variable 'indent-tabs-mode) 'nil)
-;;            (set (make-local-variable 'tab-width) 2)
-;;            (imenu-add-to-menubar "IMENU")
-;; ;           (require 'ruby-electric)
-;;            (ruby-electric-mode t)
-;; ;           (require 'ruby-block)
-;;            (ruby-block-mode t)
-;; ;           (local-set-key 'f1 'ri)
-;;            (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
-;; ;           (local-set-key 'f4 'ri-ruby-show-args)
-;;            (define-key ruby-mode-map "\M-\C-o" 'rct-complete-symbol)
-;;            (local-set-key (kbd "<return>") 'newline-and-indent)
-;; ))
-
-
-;; nxhtml
-;(setq *nxhtml-autostart-file* (expand-file-name "~/.emacs.d/plugins/nxhtml/autostart.el"))
-;(load *nxhtml-autostart-file*)
-;(setq
-;      nxhtml-global-minor-mode t
-;      mumamo-chunk-coloring 'submode-colored
-;      nxhtml-skip-welcome t
-;      indent-region-mode t
-;      nxhtml-default-encoding "utf8"
-;      rng-nxml-auto-validate-flag nil
-;      nxml-degraded t)
-;(add-to-list 'auto-mode-alist '("\\.html$" . nxhtml-mumamo-mode))
-;(add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode))
-;(add-hook 'nxhtml-mumamo-mode-hook 'tabkey2-mode)
-;(add-hook 'eruby-nxhtml-mumamo-mode-hook 'tabkey2-mode)
-
 
 ;; flymake
 ;;(add-to-list  'load-path "~/.emacs.d/plugins/flymake")
@@ -467,30 +375,6 @@ makes)."
     (flymake-log 3 "create-temp-intemp: file=%s temp=%s" file-name temp-name)
     temp-name))
 
-
-;; Invoke ruby with '-c' to get syntax checking
-;; (defun flymake-ruby-init ()
-;;   (let* ((temp-file   (flymake-init-create-temp-buffer-copy
-;;                        'flymake-create-temp-intemp))
-;;          (local-file  (file-relative-name
-;;                        temp-file
-;;                        (file-name-directory buffer-file-name))))
-;;     (list "ruby" (list "-c" local-file))))
-
-;; (push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
-;; (push '(".+\\.rjs$" flymake-ruby-init) flymake-allowed-file-name-masks)
-;; (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
-
-;; (push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3) flymake-err-line-patterns)
-
-;; (add-hook 'ruby-mode-hook
-;;           '(lambda ()
-
-;;              ;; Don't want flymake mode for ruby regions in rhtml files and also on read only files
-;;              (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
-;;                  (flymake-mode))
-;;              ))
-
 ;;(require 'flymake-jslint)
 (add-hook 'javascript-mode-hook
           '(lambda ()
@@ -498,12 +382,6 @@ makes)."
              (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
                  (flymake-mode))
              ))
-
-
-;; Rinari
-;; (add-to-list 'load-path "~/.emacs.d/plugins/rinari")
-;; (require 'rinari)
-;; (setq rinari-tags-file-name "TAGS")
 
 
 ;; yasnippet
@@ -516,10 +394,8 @@ makes)."
 ;; yasnippet rails
 (load "~/.emacs.d/plugins/yasnippets-rails/setup.el")
 
-
 (add-to-list 'load-path "~/.emacs.d/plugins/autotest")
 ;;(require 'autotest)
-
 
 ;; rhtml-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/rhtml")
@@ -527,41 +403,13 @@ makes)."
 (add-hook 'rhtml-mode-hook
   (lambda () (rinari-launch)))
 
-;; (add-hook 'rhtml-mode
-;;           (let ((original-command (lookup-key rhtml-mode-map [tab])))
-;;             `(lambda ()
-;;                (setq yas/fallback-behavior
-;;                      '(apply ,original-command))
-;;                (local-set-key [tab] 'yas/expand))))
-
 
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete")
 (require 'auto-complete-config)
-;(global-auto-complete-mode t)
-;(define-key ac-complete-mode-map "\C-n" 'ac-next)
-;(define-key ac-complete-mode-map "\C-p" 'ac-previous)
-;;     ;; start completion when entered 3 characters
-;(setq ac-auto-start 2)
-;; Add following code to your .emacs.
-;;
-;(define-key ac-complete-mode-map "\t" 'ac-complete)
-;(define-key ac-complete-mode-map "\r" nil)
-
-
-;(add-to-list 'load-path "~/.emacs.d/plugins/auto-complete")
-; (when (require 'auto-complete nil t)
-;   (require 'auto-complete-yasnippet)
-;   (require 'auto-complete-ruby)
-;   (require 'auto-complete-css)
 
    (global-auto-complete-mode t)           ;enable global-mode
    (setq ac-auto-start t)                  ;automatically start
    (setq ac-dwim 3)                        ;Do what i mean
-;;   (setq ac-override-local-map nil)        ;don't override local map
-;;   (define-key ac-complete-mode-map "\t" 'ac-expand)
-;;   (define-key ac-complete-mode-map "\r" 'ac-complete)
-;;   (define-key ac-complete-mode-map "\M-n" 'ac-next)
-;;   (define-key ac-complete-mode-map "\M-p" 'ac-previous)
    (set-default 'ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer))
 
    (setq ac-modes
@@ -569,8 +417,6 @@ makes)."
                  '(eshell-mode
                    ;org-mode
                    )))
-   ;(add-to-list 'ac-trigger-commands 'org-self-insert-command)
-
    (add-hook 'emacs-lisp-mode-hook
              (lambda ()
                (setq ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer ac-source-symbols))))
@@ -582,21 +428,6 @@ makes)."
    (add-hook 'ruby-mode-hook
              (lambda ()
                (setq ac-omni-completion-sources '(("\\.\\=" ac-source-rcodetools)))));)
-
-
-;; ri
-;(load "~/.emacs.d/plugins/ri/ri.el")
-
-;; snippet
-;(add-to-list 'load-path "~/.emacs.d/plugins/snippet")
-
-;; rails-emacs
-;(add-to-list 'load-path "~/.emacs.d/plugins/emacs-rails")
-;(require 'rails)
-
-;(kill-buffer "*ESS*")
-;(kill-buffer "*Compile-Log*")
-;(kill-buffer "*Messages*")
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -615,7 +446,7 @@ makes)."
 (require 'undo-tree)
 
 '(show-trailing-whitespace t)
- '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(pyc\\|elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
+'(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(pyc\\|elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\)$\\)\\)")))))
 (savehist-mode 1)
 ;;;(load-file "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python/epy-init.el")
 
@@ -655,7 +486,91 @@ makes)."
                '("\\.py\\'" flymake-pyflakes-init)))
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
-(custom-set-variables
-'(py-pychecker-command "/home/local/PALYAM/njagadeesh/bin/pychecker.sh")
-'(py-pychecker-command-args (quote ("")))
-'(python-check-command "/home/local/PALYAM/njagadeesh/bin/pychecker.sh"))
+
+;; inserts IP at the cursor
+(defun insertip()
+       (interactive)
+       (insert (eval (shell-command-to-string "hostname -I"))))
+;; This function is taken from 
+;; http://emacsredux.com/
+(defun font-lock-comment-annotations ()
+  "Highlight a bunch of well known comment annotations.This functions should be added to the hooks of major modes for programming."
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|OPTIMIZE\\|HACK\\|REFACTOR\\):"
+          1 font-lock-warning-face t))))
+(add-hook 'python-mode 'font-lock-comment-annotations)
+
+;; psgml for dtml
+
+(add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/psgml/share/emacs/site-lisp")
+(require 'psgml)
+;;(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
+(setq auto-mode-alist
+       (nconc
+         '(("\\.html$" . xml-mode))
+         '(("\\.dtml$" . xml-mode))
+         '(("\\.xml$" . xml-mode))
+         auto-mode-alist))
+(add-hook 'xml-mode-hook   ; XML-specific settings
+        (function (lambda()
+
+; faces creation
+(make-face 'sgml-comment-face)
+(make-face 'sgml-start-tag-face)
+(make-face 'sgml-end-tag-face)
+(make-face 'sgml-doctype-face)
+
+; faces definitions
+(set-face-foreground 'sgml-comment-face "SeaGreen")
+(set-face-foreground 'sgml-start-tag-face "OrangeRed")
+(set-face-foreground 'sgml-end-tag-face "OrangeRed")
+(set-face-foreground 'sgml-doctype-face "MintCream")
+
+; markup to face mappings
+; (see http://www.lysator.liu.se/~lenst/about_psgml/psgml.html#Highlight for details)
+(setq sgml-markup-faces
+      '((comment . sgml-comment-face)
+        (start-tag . sgml-start-tag-face)
+        (end-tag . sgml-end-tag-face)
+        (doctype . sgml-doctype-face)
+        )
+      )
+
+; turn faces on
+(setq sgml-set-face t))))
+
+(add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/")
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\.dtml$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.dtml$" . js2-mode))
+
+; Must have org-mode loaded before we can configure org-babel
+(require 'org-install)
+
+; Some initial langauges we want org-babel to support
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (sh . t)
+   (python . t)
+   (R . t)
+   (ruby . t)
+   (ditaa . t)
+   (dot . t)
+   (octave . t)
+   (sqlite . t)
+   (perl . t)
+   ))
+
+
+(when (load "flymake" t)
+ (defun flymake-pylint-init ()
+   (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                      'flymake-create-temp-inplace))
+          (local-file (file-relative-name
+                       temp-file
+                       (file-name-directory buffer-file-name))))
+         (list "/home/local/PALYAM/njagadeesh/virtualenvs/py2.7/bin/pep8" (list "--repeat" local-file))))
+
+ (add-to-list 'flymake-allowed-file-name-masks
+              '("\\.py\\'" flymake-pylint-init)))
