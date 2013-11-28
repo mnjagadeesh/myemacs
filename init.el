@@ -5,12 +5,14 @@
 (load-file "~/.emacs.d/plugins/minimap/minimap.el")
 (require 'minimap)
 
+(load "~/.emacs.d/plugins/nyan-mode/nyan-mode.el")
+(require 'nyan-mode)
 
 ;(set-default-font "Bitstream Vera Sans Mono-10")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;  'han '("cwTeXHeiBold" . "unicode-bmp"))
 ;;; ================= uptime ============================
-(setq-default 
+(setq-default
  mode-line-format
  (list " " 'mode-line-modified
        "--" 'mode-line-buffer-identification
@@ -21,6 +23,10 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/magit")
 ;;;(add-to-list 'load-path "~/.emacs.d/plugins/magit/contrib")
 (require 'magit)
+(load "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/blank-mode.el")
+(require 'blank-mode)
+
+
 
 ;;; =====================================================
 (setq make-backup-files nil)
@@ -51,7 +57,7 @@
 
 ;; Get rid of toolbar, scrollbar, menubar
 (progn
-  (linum-mode 1)  
+  (linum-mode 1)
   (tool-bar-mode -1)
 ;  (menu-bar-mode)
   (scroll-bar-mode))
@@ -445,7 +451,7 @@ makes)."
 (load "~/.emacs.d/plugins/undo-tree.el")
 (require 'undo-tree)
 
-'(show-trailing-whitespace t)
+;; '(show-trailing-whitespace t)
 '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(pyc\\|elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\)$\\)\\)")))))
 (savehist-mode 1)
 ;;;(load-file "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python/epy-init.el")
@@ -460,7 +466,7 @@ makes)."
 (define-key python-mode-map (kbd "C-c C-b") 'python-add-breakpoint)
 
 ; Set cursor color to white
-(set-cursor-color "#ffffff") 
+(set-cursor-color "#ffffff")
 
 (add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/emacs-for-python") ;; tell where to load the various files
 (require 'epy-setup)      ;; It will setup other loads, it is required!
@@ -491,7 +497,7 @@ makes)."
 (defun insertip()
        (interactive)
        (insert (eval (shell-command-to-string "hostname -I"))))
-;; This function is taken from 
+;; This function is taken from
 ;; http://emacsredux.com/
 (defun font-lock-comment-annotations ()
   "Highlight a bunch of well known comment annotations.This functions should be added to the hooks of major modes for programming."
@@ -511,23 +517,23 @@ makes)."
          '(("\\.dtml$" . xml-mode))
          '(("\\.xml$" . xml-mode))
          auto-mode-alist))
-(add-hook 'xml-mode-hook   ; XML-specific settings
-        (function (lambda()
+;; (add-hook 'xml-mode-hook   ; XML-specific settings
+;;         (function (lambda()
 
-; faces creation
+;faces creation
 (make-face 'sgml-comment-face)
 (make-face 'sgml-start-tag-face)
 (make-face 'sgml-end-tag-face)
 (make-face 'sgml-doctype-face)
 
-; faces definitions
+;; ; faces definitions
 (set-face-foreground 'sgml-comment-face "SeaGreen")
 (set-face-foreground 'sgml-start-tag-face "OrangeRed")
 (set-face-foreground 'sgml-end-tag-face "OrangeRed")
 (set-face-foreground 'sgml-doctype-face "MintCream")
 
-; markup to face mappings
-; (see http://www.lysator.liu.se/~lenst/about_psgml/psgml.html#Highlight for details)
+;; ; markup to face mappings
+;; ; (see http://www.lysator.liu.se/~lenst/about_psgml/psgml.html#Highlight for details)
 (setq sgml-markup-faces
       '((comment . sgml-comment-face)
         (start-tag . sgml-start-tag-face)
@@ -536,41 +542,110 @@ makes)."
         )
       )
 
-; turn faces on
-(setq sgml-set-face t))))
+;; ; turn faces on
+;; (setq sgml-set-face t))))
 
-(add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/")
-(autoload 'js2-mode "js2" nil t)
+(load "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/js2-mode.el")
+(load "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/js2-mode.el")
+(require 'js2-mode)
+;; (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\.dtml$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.dtml$" . js2-mode))
 
 ; Must have org-mode loaded before we can configure org-babel
 (require 'org-install)
 
-; Some initial langauges we want org-babel to support
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (sh . t)
-   (python . t)
-   (R . t)
-   (ruby . t)
-   (ditaa . t)
-   (dot . t)
-   (octave . t)
-   (sqlite . t)
-   (perl . t)
-   ))
+;Some initial langauges we want org-babel to support
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '(
+;;    (sh . t)
+;;    (python . t)
+;;    (R . t)
+;;    (ruby . t)
+;;    (ditaa . t)
+;;    (dot . t)
+;;    (octave . t)
+;;    (sqlite . t)
+;;    (perl . t)
+;;    ))
 
 
-(when (load "flymake" t)
- (defun flymake-pylint-init ()
-   (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                      'flymake-create-temp-inplace))
-          (local-file (file-relative-name
-                       temp-file
-                       (file-name-directory buffer-file-name))))
-         (list "/home/local/PALYAM/njagadeesh/virtualenvs/py2.7/bin/pep8" (list "--repeat" local-file))))
+;; (when (load "flymake" t)
+;;  (defun flymake-pylint-init ()
+;;    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                       'flymake-create-temp-inplace))
+;;           (local-file (file-relative-name
+;;                        temp-file
+;;                        (file-name-directory buffer-file-name))))
+;;          (list "/home/local/PALYAM/njagadeesh/virtualenvs/py2.7/bin/pep8" (list "--repeat" local-file))))
 
- (add-to-list 'flymake-allowed-file-name-masks
-              '("\\.py\\'" flymake-pylint-init)))
+;;  (add-to-list 'flymake-allowed-file-name-masks
+;;               '("\\.py1234\\'" flymake-pylint-init)))
+(load "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/pretty-lambdada.el")
+(require 'pretty-lambdada)
+(pretty-lambda-for-modes)
+
+;; (add-hook 'python-mode
+;;   (lambda()
+;;     (local-set-key (kbd "C-c <right>") 'hs-show-block)
+;;     (local-set-key (kbd "C-c <left>")  'hs-hide-block)
+;;     (local-set-key (kbd "C-c <up>")    'hs-hide-all)
+;;     (local-set-key (kbd "C-c <down>")  'hs-show-all)
+;;     (hs-minor-mode t)))
+
+(global-set-key (kbd "<f3>") 'comment-region)
+(global-set-key (kbd "<f4>") 'uncomment-region)
+
+(load-file "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/lambda-mode.el")
+(require 'lambda-mode)
+(add-hook 'python-mode-hook #'lambda-mode 1)
+(setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
+
+(server-start)
+;;(add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/ack-and-a-half")
+(load "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/ack-and-a-half.el")
+(require 'ack-and-a-half)
+;; Create shorter aliases
+(defalias 'ack 'ack-and-a-half)
+(defalias 'ack-same 'ack-and-a-half-same)
+(defalias 'ack-find-file 'ack-and-a-half-find-file)
+(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
+;; (setq-default show-trailing-whitespace t)
+;; (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+
+;; nuke trailing whitespaces when writing to a file
+;;(add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
+;; display only tails of lines longer than 80 columns, tabs and
+;; trailing whitespaces
+;; save whitespace-mode variables
+;; (add-to-list 'desktop-globals-to-save 'whitespace-line-column)
+;; (add-to-list 'desktop-globals-to-save 'whitespace-style)
+
+
+;; (when (< emacs-major-version 24)
+;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+;; (load "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/blank-mode.el")
+;; (require 'blank-mode)
+
+(load "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/package.el")
+(require 'package)
+;; Any add to list for package-archives (to add marmalade or melpa) goes here
+;; (add-to-list 'package-archives
+;;     '("marmalade" .
+;;       "http://marmalade-repo.org/packages/"))
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+(package-initialize)
+
+;; below block is related to multiple cursor
+;; (defvar var-name nil) 
+;; (add-to-list 'load-path "/home/local/PALYAM/njagadeesh/.emacs.d/plugins/multiple-cursors")
+;; (require 'multiple-cursors)
+
+(setq elpy-rpc-backend "rope")
+(setq ropemacs-enable-autoimport 't)
